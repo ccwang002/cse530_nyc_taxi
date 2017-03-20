@@ -12,7 +12,7 @@ Require either [miniconda3] or [Anaconda3], which runs Python 3.6.
 
 Create a new conda virtual environment with name `cse530`:
 
-    conda create -n cse530 -f conda_environment.yml
+    conda env create -n cse530 -f conda_environment.yml
 
 Check if all the paths in `config.yaml` exist. If not, modify them with the correct paths.
 
