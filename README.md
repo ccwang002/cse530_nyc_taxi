@@ -1,6 +1,13 @@
 ## Setup
 
 
+### Rawdata
+
+Download all the files in `raw_taxi_trip_data_urls.txt` under `./raw_trip_data`
+
+`bash ./download_raw_data.sh`
+
+
 ### Database
 
 PostgreSQL 6.2 and PostGIS 2.3.2.
