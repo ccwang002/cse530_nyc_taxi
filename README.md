@@ -25,3 +25,8 @@ Check if all the paths in `config.yaml` exist. If not, modify them with the corr
 
 [miniconda3]: https://conda.io/miniconda.html
 [Anaconda3]: https://www.continuum.io/downloads
+
+
+### Notebooks 
+
+Some Jupyter notebooks are under `notebooks/` for data exploration.
