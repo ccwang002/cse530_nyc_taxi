@@ -30,3 +30,14 @@ Check if all the paths in `config.yaml` exist. If not, modify them with the corr
 ### Notebooks 
 
 Some Jupyter notebooks are under `notebooks/` for data exploration.
+
+
+
+### Load data
+
+Once raw data is available, one could init the database and table by::
+
+
+    createdb liang-bo.wang_project1
+    fab reborn create_table
+
