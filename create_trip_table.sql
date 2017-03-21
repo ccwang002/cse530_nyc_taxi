@@ -19,4 +19,4 @@ CREATE TABLE taxi_trips (
     tolls_amount        REAL,
     improvement_surcharge   REAL,
     total_amount        REAL
-)
+);
