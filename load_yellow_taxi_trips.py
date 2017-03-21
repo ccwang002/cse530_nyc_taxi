@@ -16,10 +16,7 @@ EST = pytz.timezone('US/Eastern')
 
 
 def make_nyc_dt(dt_str):
-    dt = UTC.normalize(
-        EST.localize(datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S'))
-    )
-    return dt
+    return EST.localize(datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S'))
 
 
 YELLOW_COLS = [
