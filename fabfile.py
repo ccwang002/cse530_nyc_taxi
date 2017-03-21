@@ -35,3 +35,4 @@ def load_taxi_trips():
         f'python load_yellow_taxi_trips.py --db-name {DB_NAME} '
         'raw_trip_data/yellow_tripdata_2016-06.csv'
     )
+    psql('-f update_taxi_trip_with_geom.sql')
