@@ -32,6 +32,7 @@ def reborn():
 @task
 def create_table():
     psql('-f create_trip_table.sql')
+    psql('-f create_weather_table.sql')
 
 
 @task
