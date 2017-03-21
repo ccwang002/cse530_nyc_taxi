@@ -27,7 +27,7 @@ Check if all the paths in `config.yaml` exist. If not, modify them with the corr
 [Anaconda3]: https://www.continuum.io/downloads
 
 
-### Notebooks 
+### Notebooks
 
 Some Jupyter notebooks are under `notebooks/` for data exploration.
 
@@ -35,9 +35,12 @@ Some Jupyter notebooks are under `notebooks/` for data exploration.
 
 ### Load data
 
-Once raw data is available, one could init the database and table by::
+Once raw data is available, one could run the following commands:
 
+    fab init_db             # init the database
+    fab create_table        # create the table
+    fab load_taxi_trips     # load taxi trips
 
-    createdb liang-bo.wang_project1
-    fab reborn create_table
+To restart, replace `init_db` with `reborn`:
 
+    fab reborn create_table load_taxi_trips

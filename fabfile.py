@@ -9,15 +9,29 @@ DB_NAME = "liang-bo.wang_project1"
 def psql(cmd):
     local(f'psql -d {DB_NAME} {cmd}')
 
+
 @task
-def reborn():
-    confirm('Destory and re-create the current database?', False)
-    local(f'dropdb {DB_NAME}')
+def init_db():
     local(f'createdb {DB_NAME}')
     psql('-c "CREATE EXTENSION postgis;"')
     psql('-c "SELECT PostGIS_full_version();"')
 
 
 @task
+def reborn():
+    confirm('Destory and re-create the current database?', False)
+    local(f'dropdb {DB_NAME}')
+    init_db()
+
+
+@task
 def create_table():
     psql('-f create_trip_table.sql')
+
+
+@task
+def load_taxi_trips():
+    local(
+        f'python load_yellow_taxi_trips.py --db-name {DB_NAME} '
+        'raw_trip_data/yellow_tripdata_2016-06.csv'
+    )
