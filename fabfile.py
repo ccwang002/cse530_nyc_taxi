@@ -18,6 +18,11 @@ def init_db():
 
 
 @task
+def load_zones():
+    local(f'bash load_zones.sh')
+
+
+@task
 def reborn():
     confirm('Destory and re-create the current database?', False)
     local(f'dropdb {DB_NAME}')
