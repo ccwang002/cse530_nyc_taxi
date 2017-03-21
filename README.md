@@ -1,6 +1,5 @@
 ## Setup
 
-
 ### Rawdata
 
 Download all the files in `raw_taxi_trip_data_urls.txt` under `./raw_trip_data`
@@ -21,16 +20,8 @@ Create a new conda virtual environment with name `cse530`:
 
     conda env create -n cse530 -f conda_environment.yml
 
-Check if all the paths in `config.yaml` exist. If not, modify them with the correct paths.
-
 [miniconda3]: https://conda.io/miniconda.html
 [Anaconda3]: https://www.continuum.io/downloads
-
-
-### Notebooks
-
-Some Jupyter notebooks are under `notebooks/` for data exploration.
-
 
 
 ### Load data
@@ -44,3 +35,12 @@ Once raw data is available, one could run the following commands:
 To restart, replace `init_db` with `reborn`:
 
     fab reborn create_table load_taxi_trips
+
+
+
+## Misc.
+
+### Notebooks
+
+Some Jupyter notebooks are under `notebooks/` for data exploration.
+
