@@ -1,0 +1,22 @@
+CREATE TABLE taxi_trips (
+    taxi_type           VARCHAR(16),
+    vendor_id           INTEGER,
+    pickup_datetime     TIMESTAMP WITH TIME ZONE,
+    dropoff_datetime    TIMESTAMP WITH TIME ZONE,
+    passenger_count     INTEGER,
+    trip_distance       DOUBLE PRECISION,
+    pickup_lon          DOUBLE PRECISION,
+    pickup_lat          DOUBLE PRECISION,
+    rate_code_id        INTEGER,
+    store_and_fwd_flag  VARCHAR(1),
+    dropoff_lon         DOUBLE PRECISION,
+    dropoff_lat         DOUBLE PRECISION,
+    payment_type        INTEGER,
+    fare_amount         REAL,
+    extra               REAL,
+    mta_tax             REAL,
+    tip_amount          REAL,
+    tolls_amount        REAL,
+    improvement_surcharge   REAL,
+    total_amount        REAL
+)
