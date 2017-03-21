@@ -31,10 +31,11 @@ Once raw data is available, one could run the following commands:
     fab init_db             # init the database
     fab create_table        # create the table
     fab load_taxi_trips     # load taxi trips
+    fab load_zones          # load zones
 
 To restart, replace `init_db` with `reborn`:
 
-    fab reborn create_table load_taxi_trips
+    fab reborn create_table load_taxi_trips load_zones
 
 
 
