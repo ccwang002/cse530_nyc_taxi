@@ -42,3 +42,11 @@ def load_taxi_trips():
         'raw_trip_data/yellow_tripdata_2016-06.csv'
     )
     psql('-f update_taxi_trip_with_geom.sql')
+
+
+@task
+def load_weather():
+    local(
+        f'python load_weather.py --db-name {DB_NAME} '
+        'raw_weather_data/ny_weather_2015-2016.csv'
+    )
