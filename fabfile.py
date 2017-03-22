@@ -11,6 +11,11 @@ def psql(cmd):
 
 
 @task
+def download_raw_data():
+    local('bash ./download_raw_data.sh')
+
+
+@task
 def init_db():
     local(f'createdb {DB_NAME}')
     psql('-c "CREATE EXTENSION postgis;"')
