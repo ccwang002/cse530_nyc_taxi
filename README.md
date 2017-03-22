@@ -1,15 +1,9 @@
 ## Setup
 
-### Rawdata
 
-Download all the files in `raw_taxi_trip_data_urls.txt` under `./raw_trip_data`
+### System requirement
 
-`bash ./download_raw_data.sh`
-
-
-### Database
-
-PostgreSQL 6.2 and PostGIS 2.3.2.
+Requires PostgreSQL 6.2 and PostGIS 2.3.2.
 
 
 ### Python
@@ -24,19 +18,22 @@ Create a new conda virtual environment with name `cse530`:
 [Anaconda3]: https://www.continuum.io/downloads
 
 
-### Load data
+### Construct the Database
 
-Once raw data is available, one could run the following commands:
+One could run the following commands to construct the database named `liang-bo.wang_project1`:
 
+    fab download_raw_data   # download raw data 
     fab init_db             # init the database
     fab create_table        # create the table
-    fab load_taxi_trips     # load taxi trips
-    fab load_zones          # load zones
+    fab load_taxi_trips     # load taxi trip data
+    fab load_zones          # load zones shape data
+    fab load_weather        # load weather data
 
-To restart, replace `init_db` with `reborn`:
+which can be specified by one liner:
 
-    fab reborn create_table load_taxi_trips load_zones
+    fab download_raw_data init_db ... load_weather
 
+To restart the database, replace `init_db` with `reborn`.
 
 
 ## Misc.
