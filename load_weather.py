@@ -45,7 +45,8 @@ def read_weather(csv_pth, chunksize=20000):
             'record_datetime': to_utc_date,
             **{col: to_na_decimal for col in DECIMAL_FIELDS},
         },
-        chunksize=chunksize
+        chunksize=chunksize,
+        memory_map=True
     )
 
 
