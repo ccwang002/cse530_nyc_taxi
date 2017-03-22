@@ -1,7 +1,8 @@
 import argparse
 from collections import namedtuple
 from datetime import datetime
-from io import BytesIO, StringIO
+from decimal import Decimal
+from io import BytesIO
 import logging
 from pathlib import Path
 
@@ -16,7 +17,9 @@ EST = pytz.timezone('US/Eastern')
 
 
 def make_nyc_dt(dt_str):
-    return EST.localize(datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S'))
+    return EST.localize(
+        datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S')
+    )
 
 
 YELLOW_COLS = [
@@ -30,31 +33,56 @@ YELLOW_COLS = [
     'improvement_surcharge', 'total_amount'
 ]
 
+INTEGER_FIELDS = [
+    'vendor_id',
+    'passenger_count',
+    'rate_code_id',
+    'payment_type'
+]
 
-def read_yellow_trip(csv_pth, chunksize=100000):
-    df_reader = pd.read_csv(
+DATETIME_FIELDS = [
+    'pickup_datetime', 'dropoff_datetime',
+]
+
+DECIMAL_FIELDS = [
+    'trip_distance',
+    'pickup_lon', 'pickup_lat',
+    'dropoff_lon', 'dropoff_lat',
+    'fare_amount', 'extra', 'mta_tax',
+    'tip_amount', 'tolls_amount',
+    'improvement_surcharge', 'total_amount'
+]
+
+
+def read_yellow_trip(csv_pth, chunksize=20000):
+    logger.info(f'Split CSV by chunk size: {chunksize}')
+    return pd.read_csv(
         csv_pth,
-        header=0, index_col=False, usecols=range(19),
-        chunksize=chunksize, parse_dates=False,
-        names=YELLOW_COLS
+        header=0,
+        names=YELLOW_COLS,
+        usecols=range(19),
+        index_col=False, parse_dates=False, na_filter=False,
+        dtype={
+            col: int for col in INTEGER_FIELDS
+        },
+        converters={
+            'store_and_fwd_flag': str.encode,
+            **{col: Decimal for col in DECIMAL_FIELDS},
+            **{col: make_nyc_dt for col in DATETIME_FIELDS},
+            **{col: int for col in INTEGER_FIELDS},
+        },
+        chunksize=chunksize,
+        memory_map=True
     )
-    for i, df in enumerate(df_reader):
-        logger.info(f'Reading chunck {i * chunksize} - {(i + 1) * chunksize}')
-        yield df
 
 
 def load_yellow_trip_to_db(csv_pth, conn, mgr):
-    for df in read_yellow_trip(csv_pth):
-        # Create DB records
-        records = []
-        for trip in df.itertuples(index=False, name='YellowTrip'):
-            tup = trip._replace(
-                pickup_datetime=make_nyc_dt(trip.pickup_datetime),
-                dropoff_datetime=make_nyc_dt(trip.dropoff_datetime),
-                store_and_fwd_flag=trip.store_and_fwd_flag.encode(),
-            )
-            records.append((b'YELLOW', *tup))
-        # Copy records into DB
+    for i, df in enumerate(read_yellow_trip(csv_pth)):
+        logger.info(f'Reading chunk {i}')
+        records = [
+            (b'YELLOW', *tup)
+            for tup in df.itertuples(index=False, name='YellowTrip')
+        ]
         with conn:
             mgr.copy(records, BytesIO)
 
