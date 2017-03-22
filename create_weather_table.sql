@@ -1,4 +1,5 @@
 CREATE TABLE weather (
+    id                  SERIAL PRIMARY KEY,
     station             VARCHAR(3),
     record_datetime     TIMESTAMP WITH TIME ZONE,
     temperature         NUMERIC,    -- °C
