@@ -19,7 +19,7 @@ def download_raw_data():
 def init_db():
     local(f'createdb {DB_NAME}')
     psql('-c "CREATE EXTENSION postgis;"')
-    psql('-c "SELECT PostGIS_full_version();"')
+    psql('-P pager=off -c "SELECT PostGIS_full_version();"')
 
 
 @task
