@@ -21,9 +21,3 @@ CREATE TABLE taxi_trips (
     improvement_surcharge   NUMERIC,
     total_amount        NUMERIC
 );
-
-CREATE INDEX taxi_trips_pickup_datetime_ix
-    ON  taxi_trips (pickup_datetime);
-
-CREATE INDEX taxi_trips_dropoff_datetime_ix
-    ON  taxi_trips (dropoff_datetime);
