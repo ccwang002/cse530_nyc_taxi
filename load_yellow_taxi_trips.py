@@ -54,7 +54,7 @@ DECIMAL_FIELDS = [
 ]
 
 
-def read_yellow_trip(csv_pth, chunksize=20000):
+def read_yellow_trip(csv_pth, chunksize=100000):
     logger.info(f'Split CSV by chunk size: {chunksize}')
     return pd.read_csv(
         csv_pth,
