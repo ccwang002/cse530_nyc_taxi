@@ -14,6 +14,12 @@ Create a new conda virtual environment with name `cse530`:
 
     conda env create -n cse530 -f conda_environment.yml
 
+and activate the environment by:
+
+    source activate cse530
+
+All the Python scripts below assume the environment activated.
+
 [miniconda3]: https://conda.io/miniconda.html
 [Anaconda3]: https://www.continuum.io/downloads
 
