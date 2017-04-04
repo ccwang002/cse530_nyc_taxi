@@ -9,7 +9,7 @@ with open(fileName) as f:
 
   #format header
   heading = next(f).split();
-  newHeading =  "%s %10s %15s %5s\n" % (heading[0], heading[1], heading[2], heading[-3])
+  newHeading =  "%s\t%s\t%s\t%s\n" % (heading[0], heading[1], heading[2], heading[-3])
   targetFile.write(newHeading);
 
   # start reading data
@@ -43,7 +43,7 @@ with open(fileName) as f:
     p01hour = round( p01hour, 2); # round to 2 decimal place
     words[-3] = str(p01hour);
 
-    newLine =  "%s %15s %s %8s %5s\n" % (words[0], words[1], words[2], words[3], words[-3])
+    newLine =  "%s\t%s %s\t%s\t%5s\n" % (words[0], words[1], words[2], words[3], words[-3])
     targetFile.write(newLine);
 
 
