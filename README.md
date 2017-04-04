@@ -36,6 +36,11 @@ which can be specified by one liner:
 To restart the database, replace `init_db` with `reborn`.
 
 
+## Analysis
+
+All analysis scripts to generate figures in the report are under `analysis/`.
+
+
 ## Misc.
 
 ### Notebooks
