@@ -38,6 +38,7 @@ def reborn():
 def create_table():
     psql('-f create_trip_table.sql')
     psql('-f create_weather_table.sql')
+    psql('-f create_normalize_weather_table.sql')
 
 
 @task
@@ -54,4 +55,8 @@ def load_weather():
     local(
         f'python load_weather.py --db-name {DB_NAME} '
         'raw_weather_data/ny_weather_2015-2016.csv'
+    )
+    local(
+        f'python load_normalize_weather.py --db-name {DB_NAME} '
+        'raw_weather_data/ny_weather_2015-2016_normalize.csv'
     )
